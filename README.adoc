@@ -1,0 +1,1 @@
+image::deneme.png[resim 1]
