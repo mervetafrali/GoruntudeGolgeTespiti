@@ -194,80 +194,228 @@ image::12.png[12]
 [source,python]
 ---------------------------------------------------------------------
 
-from PIL import Image           #PIL modülünden IMAGE kütüphanesini uygulamamıza dahil ediyoruz.
-image=Image.open("image.jpg")       #image değişkeninin içerisine proje klasörümüzde bulunan 'image' adlı resim dosyasını atıyoruz.
-newmat = image.load()           #newmat adlı yeni bir matris oluşturup bunun içerisine resim dosyamızı yüklüyoruz.
-wdh=image.size[0]           #wgh değişkenine resim dosyasının genişlik boyutunu atıyoruz. Dosyamızın genişliği 640 piksel.
-hgh=image.size[1]           #hgh değişkenine resim dosyasının yükseklik boyutunu atıyoruz. Dosyamızın yüksekliği 360 piksel
-graylist=[[0]*hgh for x in range(wdh)]  #graylist adında tanımladığımız matrisin boyutunu yukarıda aldığımız resim dosyamızın genişlik ve yükseklik değerlerine göre belirliyoruz.
+from PIL import Image           
 
-for x in range(wdh):        #Otsu metodu gri seviye görüntüler üzerinde çalıştığı için resim dosyamızı gri tonlarına çevirmek için iç içe döngü ile matrise çekiyoruz. Böylece her bir piksel birer matris elemanı olacaktır. 
+#PIL modülünden IMAGE kütüphanesini uygulamamıza dahil ediyoruz.
+
+image=Image.open("image.jpg")      
+
+#image değişkeninin içerisine proje klasörümüzde bulunan 'image' adlı resim dosyasını atıyoruz.
+
+newmat = image.load()          
+
+#newmat adlı yeni bir matris oluşturup bunun içerisine resim dosyamızı yüklüyoruz.
+
+wdh=image.size[0]           
+
+#wgh değişkenine resim dosyasının genişlik boyutunu atıyoruz. Dosyamızın genişliği 640 piksel.
+
+hgh=image.size[1]           
+
+#hgh değişkenine resim dosyasının yükseklik boyutunu atıyoruz. Dosyamızın yüksekliği 360 piksel
+
+graylist=[[0]*hgh for x in range(wdh)]  
+
+#graylist adında tanımladığımız matrisin boyutunu yukarıda aldığımız resim dosyamızın genişlik ve yükseklik değerlerine göre belirliyoruz.
+
+for x in range(wdh):       
+
+#Otsu metodu gri seviye görüntüler üzerinde çalıştığı için resim dosyamızı gri tonlarına çevirmek için iç içe döngü ile matrise çekiyoruz. Böylece her bir piksel birer matris elemanı olacaktır. 
+
     for y in range(hgh):
-        r, g, b = image.getpixel((x, y))        #Her pikselde birer r(kırmızı),g(yeşil),b(mavi) değeri bulunmaktadır. Bunlar o piksele renk veren kodlardır. Öncelikle 'getpixel' fonksiyonu ile bu değerleri r,g,b değişkenlerine atıyoruz. 
-        gray=(int)((r*0.2126)+(g*0.7152)+(b*0.0722))        #Resimizi gri yapacak olan sayısal değeri elde etmek için, insan gözünün gama ışınlarını algılama oranlarına göre oluşturulan formül ile aldığımız katsayıları r,g,b değişkenleriyle çarpıp topluyoruz. Böylece resimdeki her piksel için ayrı bir gri renk tonu elde etmiş oluyoruz.
-        graylist[x][y]=gray         #graylist matrisinin her elemanına ağırlık toplama yöntemi ile bulduğumuz gri değerini kaydediyoruz.
-        newmat[x,y]=(gray,gray,gray)            #Resim dosyasını yüklediğimiz matrisin tüm elemanlarına(piksellerine) ağırlık toplama yöntemine göre bulduğumuz gri renk kodunu atıyoruz. Böylece resmin her pikseli renk tonuna göre gri rengini almış olacaktır. Burada kırmızı, yeşil, mavi renk tonlarının hepsine aynı değeri atıyoruz. Bu yöntem gri rengini elde etmemizi sağlıyor.
-image.save("new.bmp")       #Artık gri tonlarında olan resmi proje dosyasının içine .bmp uzantılı olarak kaydediyoruz.
+        r, g, b = image.getpixel((x, y))        
+        
+        #Her pikselde birer r(kırmızı),g(yeşil),b(mavi) değeri bulunmaktadır. Bunlar o piksele renk veren kodlardır. Öncelikle 'getpixel' fonksiyonu ile bu değerleri r,g,b değişkenlerine atıyoruz. 
+        
+        gray=(int)((r*0.2126)+(g*0.7152)+(b*0.0722))        
+        
+        #Resimizi gri yapacak olan sayısal değeri elde etmek için, insan gözünün gama ışınlarını algılama oranlarına göre oluşturulan formül ile aldığımız katsayıları r,g,b değişkenleriyle çarpıp topluyoruz. Böylece resimdeki her piksel için ayrı bir gri renk tonu elde etmiş oluyoruz.
+        
+        graylist[x][y]=gray         
+        
+        #graylist matrisinin her elemanına ağırlık toplama yöntemi ile bulduğumuz gri değerini kaydediyoruz.
+        
+        newmat[x,y]=(gray,gray,gray)            
+        
+        #Resim dosyasını yüklediğimiz matrisin tüm elemanlarına(piksellerine) ağırlık toplama yöntemine göre bulduğumuz gri renk kodunu atıyoruz. Böylece resmin her pikseli renk tonuna göre gri rengini almış olacaktır. Burada kırmızı, yeşil, mavi renk tonlarının hepsine aynı değeri atıyoruz. Bu yöntem gri rengini elde etmemizi sağlıyor.
+        
+image.save("new.bmp")       
 
-def histogram(image):       #Histogram fonksiyonunu renklerin görüntü üzerindeki sayısını bulmak için kullanacağız. Bu metod bir image parametresi ile çalışmaktadır.
-    width = image.size[0]       #Parametre olarak aldığımız image dosyasının ilk elemanı olan genişlik boyutunu 'width' değişkenine atıyoruz.
-    height = image.size[1]      #Parametre olarak aldığımız image dosyasının ikinci elemanı olan yükseklik boyutunu 'height' değişkenine atıyoruz.
-    histogram=[0]*256            #histogram adında bir matris tanımlıyoruz. Bu matris renk sayılarını tutacağımız grafiktir.
-    for x in range(height):     #Görüntünün tüm piksellerini yani matrisimizin elemanlarını dolaşmak için genişlik ve yükseklik değerleriyle iç içe döngü kullanıyoruz.
-        for y in range(width):
-            a,b,c=image.getpixel((y,x))     #image değişkeninin her pikselinde bulunan sayısal değerleri çekip a,b,c değişkenine atıyoruz. Burada gelen değer örnek olarak :(200,200,200) şeklindedir. Çünkü ağırlık toplama yönteminden sonra her pikselde aynı sayısal değer yani aynı tonlar bulunuyordu.
-            histogram[a]=histogram[a]+1       #Bulduğumuz üç değerden herhangi birini kullanarak histogramda topladığımız renk sayısını bir arttırıyoruz.
-    return histogram     #Geri dönüş değeri olan histogramda iç içe döngülerin sonucunda resmin üzerinde bulunan her pikseldeki renk tonunu ayrı ayrı tutmuş olduk.
+#Artık gri tonlarında olan resmi proje dosyasının içine .bmp uzantılı olarak kaydediyoruz.
 
-def Otsu(image):       #Otsu algoritmasını kullancağımız fonksiyon. 'otsu_thrd' adlı metodumuz image parametresi ile çalıştırılmaktadır.
-    hist=histogram(image)       #Otsu metodunun en önemli özelliği olan histogram yani renk sayısını bulmak için ilk olarak parametremiz olan 'image' değişkenini histogram fonksiyonuna gönderiyoruz. Geri dönen matris değerini 'hist' adında bir matrise atıyoruz.
-    sum_all=0           #'sum_all' adlı değişkenini toplam indis sayısını tutmak için tanımladık. İlk değer olarak '0' atadık.
+def histogram(image):       
+
+#Histogram fonksiyonunu renklerin görüntü üzerindeki sayısını bulmak için kullanacağız. Bu metod bir image parametresi ile çalışmaktadır.
+
+    width = image.size[0]       
     
-    for t in range(256):    #Histogramdan gelen matris indislerindeki toplam değeri almak için döngü oluşturuyoruz.
+    #Parametre olarak aldığımız image dosyasının ilk elemanı olan genişlik boyutunu 'width' değişkenine atıyoruz.
+    height = image.size[1]     
+    
+    #Parametre olarak aldığımız image dosyasının ikinci elemanı olan yükseklik boyutunu 'height' değişkenine atıyoruz.
+    
+    histogram=[0]*256            
+    
+    #histogram adında bir matris tanımlıyoruz. Bu matris renk sayılarını tutacağımız grafiktir.
+    
+    for x in range(height):     
+    
+    #Görüntünün tüm piksellerini yani matrisimizin elemanlarını dolaşmak için genişlik ve yükseklik değerleriyle iç içe döngü kullanıyoruz.
+        for y in range(width):
+            a,b,c=image.getpixel((y,x))     
+            
+            #image değişkeninin her pikselinde bulunan sayısal değerleri çekip a,b,c değişkenine atıyoruz. Burada gelen değer örnek olarak :(200,200,200) şeklindedir. Çünkü ağırlık toplama yönteminden sonra her pikselde aynı sayısal değer yani aynı tonlar bulunuyordu.
+            
+            histogram[a]=histogram[a]+1       
+            
+            #Bulduğumuz üç değerden herhangi birini kullanarak histogramda topladığımız renk sayısını bir arttırıyoruz.
+    return histogram     
+    
+    #Geri dönüş değeri olan histogramda iç içe döngülerin sonucunda resmin üzerinde bulunan her pikseldeki renk tonunu ayrı ayrı tutmuş olduk.
+
+def Otsu(image):       
+
+#Otsu algoritmasını kullancağımız fonksiyon. 'otsu_thrd' adlı metodumuz image parametresi ile çalıştırılmaktadır.
+    hist=histogram(image)       
+    
+    #Otsu metodunun en önemli özelliği olan histogram yani renk sayısını bulmak için ilk olarak parametremiz olan 'image' değişkenini histogram fonksiyonuna gönderiyoruz. Geri dönen matris değerini 'hist' adında bir matrise atıyoruz.
+    
+    sum_all=0           
+    
+    #'sum_all' adlı değişkenini toplam indis sayısını tutmak için tanımladık. İlk değer olarak '0' atadık.
+    
+    for t in range(256):    
+    
+    #Histogramdan gelen matris indislerindeki toplam değeri almak için döngü oluşturuyoruz.
+    
         sum_all+=t*hist[t]
         
-    sum_back = 0    #Kendisi ve kendisinden önceki indisteki elemanların değerler toplamını tutacak değişken.
-    w_back = 0      #Bulduğumuz eşik değerinden önceki değerler için weight değerini tutacak değişken.
-    w_fore = 0       #Bulduğumuz eşik değerinden sonraki değerler için weight değerini tutacak değişken.
-    mean_back = 0   #Bulduğumuz eşik değerinden önceki değerler için mean değerini tutacak değişken.
-    mean_fore = 0   #Bulduğumuz eşik değerinden sonraki değerler için mean değerini tutacak değişken.
-    var_max = 0       #Histogram elemanları arasındaki en yüksek varyans değerini tutacak değişken.
-    var_between = 0     #Histogramdaki her renk tonu için sınıflar arası varyans değerini tutacak değişken.
-    threshold = 0      #Threshold işlemini yapacak olan yani otsu metodunun asıl amacı olan eşik değerini tutacak değişken.
+    sum_back = 0   
     
-    total = image.size[0]*image.size[1]     #'total' değişkeninde görüntünün genişlik*yükseklik değerleri yani toplam alanı bulunmaktadır.
-    for t in range(256):    #Histogram üzerindeki tüm değerleri ulaşmak için döngü oluşturuyoruz.
-        w_back += hist[t]   #Eşik değerinden önceki tüm değerleri sırasıyla 'w_back' değişkeninde topluyoruz.
-        if (w_back == 0):   #Mean değerini hesaplarken paydada kullancağımız 'w_back' değerinin 0 olması durumunu kontrol ediyoruz. 0 ise döngüde sıradaki değer ile devam edilir.
+    #Kendisi ve kendisinden önceki indisteki elemanların değerler toplamını tutacak değişken.
+    
+    w_back = 0     
+    
+    #Bulduğumuz eşik değerinden önceki değerler için weight değerini tutacak değişken.
+    
+    w_fore = 0       
+   
+   #Bulduğumuz eşik değerinden sonraki değerler için weight değerini tutacak değişken.
+    
+    mean_back = 0  
+   
+   #Bulduğumuz eşik değerinden önceki değerler için mean değerini tutacak değişken.
+    
+    mean_fore = 0  
+   
+   #Bulduğumuz eşik değerinden sonraki değerler için mean değerini tutacak değişken.
+    
+    var_max = 0       
+   
+   #Histogram elemanları arasındaki en yüksek varyans değerini tutacak değişken.
+    
+    var_between = 0    
+   
+   #Histogramdaki her renk tonu için sınıflar arası varyans değerini tutacak değişken.
+    
+    threshold = 0     
+   
+   #Threshold işlemini yapacak olan yani otsu metodunun asıl amacı olan eşik değerini tutacak değişken.
+    
+    total = image.size[0]*image.size[1]    
+    
+    #'total' değişkeninde görüntünün genişlik*yükseklik değerleri yani toplam alanı bulunmaktadır.
+    
+    for t in range(256):    
+    
+    #Histogram üzerindeki tüm değerleri ulaşmak için döngü oluşturuyoruz.
+    
+        w_back += hist[t]   
+        
+        #Eşik değerinden önceki tüm değerleri sırasıyla 'w_back' değişkeninde topluyoruz.
+        
+        if (w_back == 0):   
+        
+        #Mean değerini hesaplarken paydada kullancağımız 'w_back' değerinin 0 olması durumunu kontrol ediyoruz. 0 ise döngüde sıradaki değer ile devam edilir.
+        
             continue
         
-        w_fore = total - w_back     #Eşik değerinden sonraki weight değerleri bulmak için toplam değerinden bulduğumuz önceki weight değerlerini çıkarıyoruz.
+        w_fore = total - w_back     
         
-        if (w_fore == 0) :  #Mean değerini hesaplarken paydada kullancağımız 'w_fore' değerinin 0 olması durumunu kontrol ediyoruz. 0 ise döngüde sıradaki değer ile devam edilir.
+        #Eşik değerinden sonraki weight değerleri bulmak için toplam değerinden bulduğumuz önceki weight değerlerini çıkarıyoruz.
+        
+        if (w_fore == 0) :  
+        
+        #Mean değerini hesaplarken paydada kullancağımız 'w_fore' değerinin 0 olması durumunu kontrol ediyoruz. 0 ise döngüde sıradaki değer ile devam edilir.
+        
             continue
         
-        sum_back += t * hist[t]      #Histogramda kendisi ve kendisinden önceki tüm elemanları indisleri ile çarparak topluyoruz.
-        mean_back = sum_back / w_back       #Histogramda kendisinden önce bulunan toplam değerleri kendisinden önceki weight değerlerine bölerek her indis için kendisinden önceki mean değerini hesaplıyoruz.
-        mean_fore = (sum_all - sum_back) / w_fore     #Histogramda kendisinden sonra bulunan toplam değerleri kendisinden sonraki weight değerlerine bölerek her indis için kendisinden sonraki mean değerini hesaplıyoruz.  
-        var_between = w_back * w_fore * (mean_back - mean_fore)**2      #Varyans formülünü kullanarak histogramdaki her eleman için renk tonları arasında varyans hesaplaması yapıyoruz.
+        sum_back += t * hist[t]     
         
-        if (var_between > var_max):   #Burada amacımız büyük ama en ideal eşik değerini bulmak. Bu yüzden sınıflar arası yani histogramda elemanlarımız arasındaki renk tonlarının varyans değerini hesaplamıştık. Bu yüzden en yüksek varyans değerine sahip olan elemanı bulup bulmadığımızı kontrol ediyoruz.
-            var_max = var_between  #Bulduğumuz varyans değeri en yüksek ise 'var_max' değişkeninde saklıyoruz.
-            threshold = t       #En yüksek varyansa sahip olan histogram elemanının indisini de eşik değerimiz olarak 'threshold' değişkenine atıyoruz.
-    return threshold        #Fonksiyon sonuç olarak ideal bir eşik değeri bulup geri göndermiş olacaktır.
+        #Histogramda kendisi ve kendisinden önceki tüm elemanları indisleri ile çarparak topluyoruz.
+        
+        mean_back = sum_back / w_back      
+        
+        #Histogramda kendisinden önce bulunan toplam değerleri kendisinden önceki weight değerlerine bölerek her indis için kendisinden önceki mean değerini hesaplıyoruz.
+        
+        mean_fore = (sum_all - sum_back) / w_fore     
+        
+        #Histogramda kendisinden sonra bulunan toplam değerleri kendisinden sonraki weight değerlerine bölerek her indis için kendisinden sonraki mean değerini hesaplıyoruz.  
+        
+        var_between = w_back * w_fore * (mean_back - mean_fore)**2     
+        
+        #Varyans formülünü kullanarak histogramdaki her eleman için renk tonları arasında varyans hesaplaması yapıyoruz.
+        
+        if (var_between > var_max):  
+        
+        #Burada amacımız büyük ama en ideal eşik değerini bulmak. Bu yüzden sınıflar arası yani histogramda elemanlarımız arasındaki renk tonlarının varyans değerini hesaplamıştık. Bu yüzden en yüksek varyans değerine sahip olan elemanı bulup bulmadığımızı kontrol ediyoruz.
+            var_max = var_between  
+            
+            #Bulduğumuz varyans değeri en yüksek ise 'var_max' değişkeninde saklıyoruz.
+            
+            threshold = t       
+            #En yüksek varyansa sahip olan histogram elemanının indisini de eşik değerimiz olarak 'threshold' değişkenine atıyoruz.
+    return threshold       
+    
+    #Fonksiyon sonuç olarak ideal bir eşik değeri bulup geri göndermiş olacaktır.
 
-im=Image.open("new.bmp")    #Daha önce kullandığımız griye çevirdiğimiz resim dosyamızı tekrar açıyoruz.
-otsu_th=Otsu(im)       #Açtığımız resim dosyasının eşik değerini bulmak için Otsu fonksiyonuna gönderiyoruz. Geri dönen değerimizi 'otsu_th' değişkenine atıyoruz.
-otsu_im=im.load()       #Açtığımız resim dosyasını 'otsu_im' matrsine yüklüyoruz.
-print otsu_th       #Dönen eşik değerini görmek için ekrana yazdırıyoruz.
-for x in range (wdh):   #İç içe döngü ile en başta kullandığımız 'graylist' üzerindeki tüm elemanlara ulaşıyoruz ve her eleman için kontrol gerçekleştiriyoruz.
+im=Image.open("new.bmp")    
+
+#Daha önce kullandığımız griye çevirdiğimiz resim dosyamızı tekrar açıyoruz.
+
+otsu_th=Otsu(im)       
+
+#Açtığımız resim dosyasının eşik değerini bulmak için Otsu fonksiyonuna gönderiyoruz. Geri dönen değerimizi 'otsu_th' değişkenine atıyoruz.
+otsu_im=im.load()       
+
+#Açtığımız resim dosyasını 'otsu_im' matrsine yüklüyoruz.
+
+print otsu_th      
+
+#Dönen eşik değerini görmek için ekrana yazdırıyoruz.
+
+for x in range (wdh):   
+
+#İç içe döngü ile en başta kullandığımız 'graylist' üzerindeki tüm elemanlara ulaşıyoruz ve her eleman için kontrol gerçekleştiriyoruz.
+
     for y in range (hgh):
-        if graylist[x][y]<otsu_th:  #Eğer elemanın değeri bulduğumuz eşik değerinden küçük ise resmimizi yüklediğimiz 'otsu_im' matrisinin elemanına renk kodu olarak siyah(0,0,0) değerini atıyoruz.
+        if graylist[x][y]<otsu_th: 
+        
+        #Eğer elemanın değeri bulduğumuz eşik değerinden küçük ise resmimizi yüklediğimiz 'otsu_im' matrisinin elemanına renk kodu olarak siyah(0,0,0) değerini atıyoruz.
+        
             otsu_im[x,y]=(0,0,0)
-        if graylist[x][y]>otsu_th:  #Eğer elemanın değeri bulduğumuz eşik değerinden büyük ise resmimizi yüklediğimiz 'otsu_im' matrisinin elemanına renk kodu olarak beyaz(255,255,255) değerini atıyoruz.
+        if graylist[x][y]>otsu_th:  
+        
+        #Eğer elemanın değeri bulduğumuz eşik değerinden büyük ise resmimizi yüklediğimiz 'otsu_im' matrisinin elemanına renk kodu olarak beyaz(255,255,255) değerini atıyoruz.
+        
             otsu_im[x,y]=(255,255,255)
-im.save("new2.bmp")     #Otsu algoritması işlenen görüntümüzü projemizin bulunduğu dizine kaydediyoruz.
-im.show()       #show fonksiyonu ile görüntüyü ekrana getiriyoruz.
+im.save("new2.bmp")    
+
+#Otsu algoritması işlenen görüntümüzü projemizin bulunduğu dizine kaydediyoruz.
+
+im.show()       
+
+#show fonksiyonu ile görüntüyü ekrana getiriyoruz.
 
 ---------------------------------------------------------------------
 
