@@ -21,3 +21,31 @@
 .. Python ile Histogram Aralığının Görüntüye Uygulanması
 .. Sonuçlar
 . Referanslar
+
+== 2) Versiyon Geçmişi
+
+|===
+|Tarih|Değişiklik|Kişi
+
+|10.01.2017
+|Görüntüde Gölge Tespiti
+
+|Gönül TOKTAY
+|10.01.2017
+ 
+|Görüntüde Gölge Tespiti
+|M.Sıla Genç
+
+|02.02.2017
+
+|Düzenleme
+|Merve Tafralı
+
+|===
+
+== 3) Giriş
+
+== 4)Sayısal Görüntü ve Görüntü İşleme Nedir?
+
+Gerçek yaşamda, bir görüntü veya resim basit 2 değişkenin bir fonksiyonu olarak tanımlanır. ω a(x,y) gibi bir fonksiyonla ifade edilen bir resimde a bir şiddet birimi( örneğin parlaklık) ve x ve y değişkenleri ise resmin gerçek koordinatlarıdır.[1]
+Dijital görüntü sayısal değerlerden oluşur. ω 1 ve 0’lardan oluşan sayısal görüntü yapımız a[m,n], 2 boyutlu dünyadan elde edilen a(x,y) fonksiyonundan örnekleme tekniği kullanılarak oluşturulur.
