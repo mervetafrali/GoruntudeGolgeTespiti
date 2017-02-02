@@ -1,1 +1,23 @@
-image::deneme.png[resim 1]
+= Görüntüde Gölge Yumuşatma
+
+== 1) İçindekiler
+. İçindekiler
+. Versiyon Geçmişi
+. Giriş
+. Sayısal Görüntü ve Görüntü İşlemeNedir?
+.. Görüntü İşleme Nedir?
+.. Görüntü İşleme ile Gölge Tespiti
+. Bayesian Sınıflandırma ile Gölge Tespiti
+.. Bayesian Sınıflandırma
+.. Python ile Bayesian Sınıflandırmanın Görüntüye Uygulanması
+.. Sonuçlar
+. Otsu Eşikleme Metodu ile Gölge Tespiti
+.. Otsu Eşikleme Metodu
+.. Python ile Otsu Eşikleme Metodunun Görüntüye Uygulanması
+.. Sonuçlar
+. Histogram Aralığı ile Gölge Tespiti
+.. Histogram Nedir?
+.. Histogram Aralığı Nasıl Tespit Edilir?
+.. Python ile Histogram Aralığının Görüntüye Uygulanması
+.. Sonuçlar
+. Referanslar
