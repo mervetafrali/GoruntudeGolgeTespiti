@@ -49,13 +49,13 @@
 Gerçek yaşamda, bir görüntü veya resim basit 2 değişkenin bir fonksiyonu olarak tanımlanır. ω a(x,y) gibi bir fonksiyonla ifade edilen bir resimde a bir şiddet birimi( örneğin parlaklık) ve x ve y değişkenleri ise resmin gerçek koordinatlarıdır.[1] +
 Dijital görüntü sayısal değerlerden oluşur. ω 1 ve 0’lardan oluşan sayısal görüntü yapımız a[m,n], 2 boyutlu dünyadan elde edilen a(x,y) fonksiyonundan örnekleme tekniği kullanılarak oluşturulur.
 
-image::1.png[1]
+image::https://github.com/mervetafrali/GoruntudeGolgeTespiti/raw/master/1.png[1]
 
 Sayısal bir görüntü M ve N sayılarında satır ve sütünlardan oluşur ve satır ve sütünların kesiştiği her bölgeye pixel denir. ω O piksel’deki değer ise derinlik (z) , renk(λ) ve zamanın(t) bir fonksiyonudur. +
 Dijital bir resim haline getirilmiş olan gerçek yaşamdaki görüntülerin, bir girdi resim olarak işlenerek, o resmin özelliklerinin ve görüntüsünün değiştirilmesi sonucunda yeni bir resmin oluşturulmasıdır.[1] +
 Görüntüler genellikle analog ortamlardan dijital ortamlara geçirildiği için bozukluk içerir. Bozukluklar gürültü olarak da ifade edilirler. Gürültüler görüntü üzerinde istenmeyen sinyallerdir. Görüntü işleme bu hataları  düzeltmek için kullanılabilir.Görüntü işleme bnun dışında farklı alanlarda da kullanılabilmektedir. +
 
-image::2.png[2]
+image::https://github.com/mervetafrali/GoruntudeGolgeTespiti/raw/master/2.png[2]
 
 === 4.2)Görüntü İşleme ile Gölge Tespiti
 Görüntülerdeki gölgeler,görüntü kalitesinin azalmasına sebep olmaktadır. Bu sebepten ötürü gölgelerin belirlenerek yumuşatılması gerekebilmektedir. Gölgenin belirlenmesi için Bayesian sınıflandırma algoritmasından yararlanılacaktır. Sınıflandırma algoritması görüntü işleme kapsamında Python programlama kullanılarak örneklenmeye çalışılacaktır.
@@ -75,7 +75,7 @@ Siyah beyaz görüntüler görüntü üzerinde belirli dizilerin ya da şekiller
 
 Otsu metodu, gri seviye görüntüler üzerinde uygulanabilen bir eşik tespit yöntemidir. Gri tonlarda olan bir görüntü 0-255 arasında seçilecek olan bir T eşik değerine göre siyah beyaz görüntü oluşturulur. Bu işlem kısaca şu şekilde gösterilir: +
 
-image::3.png[3]
+image::https://github.com/mervetafrali/GoruntudeGolgeTespiti/raw/master/3.png[3]
 
 Önemli olan nokta T değerinin doğru seçilmesidir. T değeri olması gerekenden büyük seçilirse, oluşturulacak olan yeni görüntüde gereğinden fazla beyaz piksel oluşacaktır. Küçük seçilirse de siyah pikseller fazla olmuş olacaktır.Seçilecek olan eşit değeri deneme yoluyla binlerce piksel için mümkün olmamaktadır. Bunun üzerine kullanılacak olan görüntü için eşik değerini hesaplayan algoritma Nobuyuki Otsu tarafından geliştirilmiştir. Geliştirilen otsu metodu eşik değerini görüntü üzerinden hesaplamaktadır. +
 
@@ -87,41 +87,41 @@ Otsu metodu kullanılırken görüntünün arka plan ve ön plan olmak üzere 2 
 
 *Varyans*: Dizi elemanlarının dizi ortalamasına olan uzaklıklarının karelerinin ortalamasıdır. Bu değer; dizi içinde var olan elemanların ortalamaya ne kadar yakın olduklarını gösterir. Varyans hesaplama formülü: +
 
-image::4.png[4]
+image::https://github.com/mervetafrali/GoruntudeGolgeTespiti/raw/master/4.png[4]
 
 Verilen formülde Pr{Xi}  ifadesi Xi değerinin gelme olaslığıdır.  Düzgün dağılımlı N boyutlu dizi için bu değer 1/N dir.  MxN lik görüntü için ise bu değer; histogram dizisi hesaplandıktan sonra i tonunun gelme olasılığı histogram[i]/(MxN )’dir. +
 Sınıflar arası varyans; +
 
-image::5.png[5]
+image::https://github.com/mervetafrali/GoruntudeGolgeTespiti/raw/master/5.png[5]
 
 Formülü ile hesaplanır. +
 W değişkenleri→ sınıf yoğunlukları	µ değişkenleri→ağırlıklı sınıf ortalamaları +
 olarak ifade edilmektedir. +
 
-image::6.png[6]
+image::https://github.com/mervetafrali/GoruntudeGolgeTespiti/raw/master/6.png[6]
 
 X(i) nin i. Renk seviyesi yukarıdaki formüllerle hesaplanmaktadır. +
 Anlaşılır olması açısından aşağıdaki örneği inceleyelim: +
 
-image::7.png[7]
+image::https://github.com/mervetafrali/GoruntudeGolgeTespiti/raw/master/7.png[7]
 
 Yanda gösterilmiş olan şekilde gri tonlamaları olan bir görüntünün 6 kısımdan oluşturulmuş histogramı bulunmaktadır. +
 
-image::8.png[Resim 8]
+image::https://github.com/mervetafrali/GoruntudeGolgeTespiti/raw/master/8.png[Resim 8]
 
 Arka plan renk sınıfının değerleri hesaplanacaktır:
 
-image::9.png[9]
+image::https://github.com/mervetafrali/GoruntudeGolgeTespiti/raw/master/9.png[9]
 
-image::10.png[10]
+image::https://github.com/mervetafrali/GoruntudeGolgeTespiti/raw/master/10.png[10]
 
 Aynı işlem ön plan renk sınıfı için tekrarlanır:
 
-image::11.png[11]
+image::https://github.com/mervetafrali/GoruntudeGolgeTespiti/raw/master/11.png[11]
 
 Elde edilen değerler sonucu sınıf varyansı:
 
-image::12.png[12]
+image::https://github.com/mervetafrali/GoruntudeGolgeTespiti/raw/master/12.png[12]
 
 
 
@@ -131,9 +131,9 @@ image::12.png[12]
 
 Matematiksel olarak histogram; gruplandırılmış bir veri dağılımının sütun grafiğiyle gösterimidir. Görüntüde ise her piksel seviyesini gösteren bir ölçüttür. Histogram grafiklerine bakılarak bir görüntüde parlaklık durumu veya görüntünün tonlamaları hakkında bilgi edinilebilmektedir. Aşağıda görüntüler ve histogram grafiklerinin örnekleri yer almaktadır. +
 
-image::18.png[re]
+image::https://github.com/mervetafrali/GoruntudeGolgeTespiti/raw/master/18.png[re]
 
-image::14.png[14]
+image::https://github.com/mervetafrali/GoruntudeGolgeTespiti/raw/master/14.png[14]
 
 Tabloların yatay ekseni gri değer aralıklarını düşey eksenler ise bu aralıklardaki piksel sayısını göstermektedir. 
 
@@ -146,12 +146,12 @@ Histogram matematiksel olarak aşağıdaki şekilde gösterilebilir.
 rk : k’nıncı parlaklık değeri 
 nk : k nıncı parlaklık değerinin görüntüdeki sayısı
 
-image::15.png[r15]
+image::https://github.com/mervetafrali/GoruntudeGolgeTespiti/raw/master/15.png[r15]
 
 8-bit parlaklıklı görüntüde 256 gri seviye vardır. Örnek olarak tüm değerler ilk 100 değerde toplanırsa renkleri fark etmek zorlaşmaktadır. +
 Dönüştürülmüş ve orjinal olan histogramlar grafiklerde görüldüğü üzere olasılık yoğnluğu olarakta gösterilebilmektedir. +
 
-image::16.png[r16]
+image::https://github.com/mervetafrali/GoruntudeGolgeTespiti/raw/master/16.png[r16]
 
 Görüntü histogramı incelendiğinde ani artışlar ton grup aralıkları olarak ifade edilebilmektedir. Görüntüde var olabilen bu kısımlar gölge olarak belirlenerek gerekli işlemler yapılabilmektedir. +
 
@@ -173,7 +173,7 @@ Görüntüdeki gölgenin yumuşatılması için gerçekleştirilecek işlemler b
 
 Histogram eşitlemenin özeti olarak; +
 
-image::15.png[r3]
+image::https://github.com/mervetafrali/GoruntudeGolgeTespiti/raw/master/15.png[r3]
 
 Bu formülü uygulama adımlarına dökecek olursak; +
 . Resmin histogramı bulunur (her gri seviye için piksel sayısı grafiği).
