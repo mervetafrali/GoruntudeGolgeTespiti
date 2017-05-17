@@ -127,6 +127,7 @@ image::https://github.com/mervetafrali/GoruntudeGolgeTespiti/raw/master/12.png[1
 
 == 7)Histogram Dengeleme/Eşitleme ile Gölge Tespiti
 
+
 === 7.1) Histogram Nedir?
 
 Matematiksel olarak histogram; gruplandırılmış bir veri dağılımının sütun grafiğiyle gösterimidir. Görüntüde ise her piksel seviyesini gösteren bir ölçüttür. Histogram grafiklerine bakılarak bir görüntüde parlaklık durumu veya görüntünün tonlamaları hakkında bilgi edinilebilmektedir. Aşağıda görüntüler ve histogram grafiklerinin örnekleri yer almaktadır. +
